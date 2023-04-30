@@ -1,0 +1,8 @@
+# Ignore venv folder
+venv
+
+# Ignore files related to API keys
+.env
+
+# Ignore SASS config files
+.sass-cache
