@@ -8,7 +8,7 @@ export class OpenaiService {
 
   private openai: OpenAIApi;
   configuration = new Configuration({
-    apiKey: "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",
+    apiKey: "",
   });
 
   constructor() {
