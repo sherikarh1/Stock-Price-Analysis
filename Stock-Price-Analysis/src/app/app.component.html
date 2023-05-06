@@ -1,0 +1,152 @@
+<div class="d-flex flex-column align-self-stretch" style="min-height: 100%;">
+	<nav class="navbar sticky-top navbar-expand-lg navbar-light blue-grey lighten-5">
+		<a style="outline: none;" routerLink="/" class="navbar-brand nav-link">
+				<img src="assets/istockphoto-1211747338-612x612.jpg" 
+				width="200" height="100" class="img-fluid">
+		</a>
+		<button  class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon" >
+			</span>
+		</button>
+
+		
+		<div class="col-auto">
+			<form class="form-container" [formGroup]='searchForm' (ngSubmit)="onSubmit(searchBar.value)">
+			  <div class="search-container p-1 px-2 col-xs-2">
+				<div class="input-group">
+					<input formControlName='userInput' #searchBar type="text" class="border-0" placeholder="Type Symbol or Ticker" [matAutocomplete]="auto" aria-label="Stock ticker name" aria-describedby="basic-addon2">
+					  <button class="btn p-0 px-2" type="submit"><i class="fa fa-search fa-lg"></i></button>
+				</div>
+	  
+				<mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+				  <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="20"></mat-spinner></mat-option>
+				  <ng-container *ngIf="!isLoading">
+					<mat-option *ngFor="let company of companySResults" [value]="company">
+					  <span>{{ company.ticker }}</span>
+					  <span> | {{ company.name }}</span>
+					</mat-option>
+				  </ng-container>
+				</mat-autocomplete>
+	  
+			  </div>
+			</form>
+		</div>
+
+		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav ml-md-auto">
+				<li class="nav-item">
+					<a class="nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLink="/" routerLinkActive="active-route">
+						<div class="px-2 text-right">
+							Search
+						</div>
+					</a>
+				</li>
+				<li class="nav-item">
+					<div class="nav-item dropdown">
+					<!-- <a class="nav-link" [routerLinkActiveOptions]="{ exact: true }" routerLink="/" routerLinkActive="active-route">
+						<div class="px-2 text-right">
+							Experts
+						</div> -->
+						<a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Experts</a>
+						<div class="px-2 text-left dropdown-menu rounded-0 m-0">
+							<a href="/topstocks" class="dropdown-item px-2 text-left">Top Stocks</a>
+							<a href="/topetfs" class="dropdown-item px-2 text-left">Top ETFs</a>
+							<a href="/stockanalysis" class="dropdown-item px-2 text-left">Analyst Bogs</a>
+							<a href="/markettrending" class="dropdown-item px-2 text-left">Market Trending</a>
+						</div>
+					</div>
+					<!-- </a> -->
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/etfs" routerLinkActive="active-route">
+						<div class="px-2 text-right ">
+							ETFs
+						</div>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/topstocks" routerLinkActive="active-route">
+						<div class="px-2 text-right ">
+							Top Stocks
+						</div>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/news" routerLinkActive="active-route">
+						<div class="px-2 text-right ">
+							Latest News
+						</div>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/watchlist" routerLinkActive="active-route">
+						<div class="px-2 text-right">
+							Watchlist
+						</div>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link"routerLink="/education" routerLinkActive="active-route">
+						<div class="px-2 text-right">
+							Education
+						</div>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/chat" routerLinkActive="active-route">
+						<div class="px-2 text-right ">
+							ChatGPT OpneAI
+						</div>
+					</a>
+				</li>
+
+			</ul>
+				
+			<ul class="navbar-nav ml-auto" *ngIf="!isLoggedIn">
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/login" routerLinkActive="active-route">
+						<div class="px-2 text-right">
+							Login
+						</div>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/signup" routerLinkActive="active-route">
+						<div class="px-2 text-right ">
+							Signup
+						</div>
+					</a>
+				</li>
+			</ul>
+
+			<ul class="navbar-nav ml-auto" *ngIf="isLoggedIn">
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/portfolio" routerLinkActive="active-route">
+						<div class="px-2 text-right ">
+							My Portfolio
+						</div>
+					</a>
+				</li>
+
+				<li class="nav-item">
+					<a class="nav-link" routerLink="/search" routerLinkActive="active-route">
+						<div class="px-2 text-right ">
+							Stock Prediction
+						</div>
+					</a>
+				</li>
+				
+				<li class="nav-item">
+				  <a href="/profile" class="nav-link" routerLink="profile">{{ username }}</a>
+				</li>
+				<li class="nav-item">
+				  <a href class="nav-link" (click)="logout()">LogOut</a>
+				</li>
+			  </ul>
+		  </div>
+	</nav>
+	<div class="flex-grow-1">
+		<router-outlet></router-outlet>
+	</div>
+	
+</div>

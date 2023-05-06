@@ -1,0 +1,30 @@
+.footer {
+
+    background-color: 	#460d0d;
+    bottom: 0;
+}
+
+
+.active-route {
+    border:2px solid #071613;
+    border-radius: 10px;
+    outline: none;
+}
+
+.nav-item a {
+    color: #0e2722 ;
+}
+
+.active-route, .navbar-brand {
+    color: #0d2924 !important;
+}
+
+.search-container {
+    border:2px solid #0c3123;
+    border-radius: 40px;
+}
+
+.search-container button i{
+    color: #18443e;
+}
+
